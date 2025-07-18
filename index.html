@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kadir Toptaş - Game Developer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+        h1, h2 {
+            margin-bottom: 10px;
+        }
+        .social-icons {
+            margin: 20px 0;
+        }
+        .social-icons a {
+            color: #fff;
+            font-size: 24px;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+        .section {
+            margin: 40px 0;
+        }
+        .section-title {
+            font-size: 24px;
+            border-bottom: 2px solid #fff;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .gallery img {
+            width: calc(30% - 10px); /* Resimlerin genişliğini ayarlayın */
+            height: auto; /* Yükseklik otomatik olsun */
+            object-fit: cover;
+            margin: 5px; /* Resimler arası boşluk */
+            cursor: pointer;
+        }
+        .video-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+        .video-container iframe {
+            flex: 1 1 calc(25% - 10px); /* 4 video yan yana gelsin diye %25 olarak değiştirildi */
+            height: 315px; /* Yükseklik buradan ayarlanacak */
+        }
+        /* Lightbox CSS */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            padding-top: 60px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+        .lightbox-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+        }
+        .lightbox-content img {
+            width: 100%;
+        }
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://i.hizliresim.com/lmjnq76.jpg" alt="Kadir Toptaş" class="profile-img">
+        <h1>Kadir Toptaş</h1>
+        <h2>Game Developer</h2>
+        
+        <div class="social-icons">
+            <a href="https://github.com/KadirToptas" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/kadirtoptas/" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://www.youtube.com/@kadirtoptasue5" target="_blank"><i class="fab fa-youtube"></i></a>
+        </div>
+
+        <div class="section">
+            <h3 class="section-title">About Me</h3>
+            <p> I am Kadir Toptaş, a student at Yıldız Technical University and a passionate game developer. My fascination with video games has been an integral part of my life since I was 5 years old, and I have decided to turn this passion into a professional career.</p>
+            <p>My game development journey began over two years ago with the Unity engine. During this time, I focused on mobile platforms and successfully published two games on the Google Play Store. Alongside these experiences, I have developed numerous demos and prototypes to nurture my creativity and technical skills. Driven by a desire for continuous growth, I have been working with Unreal Engine for the past year, elevating the experience I initially gained with the Blueprint system by significantly improving my proficiency in C++.</p>
+            <p> With the goal of mastering every stage of the development process, I actively use a wide range of technologies and software:</p>
+            <p> Game Engines: Unreal Engine, Unity</p>
+            <p> Programming Languages: C++, C#, Python, SQL, HTML, CSS</p>
+            <p> 3D/2D Design & Texturing: Blender, Maya, 3ds Max, Substance 3D Painter, Aseprite, Photoshop, Illustrator</p>
+            <p> Video, UI/UX & Audio: Adobe Premiere Pro, After Effects, Figma, FL Studio</p>
+            <p> Office Software: Microsoft Office</p>
+            <p> I have participated in numerous Game Jams, Hackathons and Bootcamps to continuously test my theoretical knowledge and practical experience. These events have strengthened my problem-solving and teamwork skills.</p>
+            <p> With an unceasing desire to learn and improve, I am determined to build a solid career in this field. For me, game development is more than just a job; it is the art of creating new worlds, telling stories, and offering players unforgettable experiences. My greatest ambition is to achieve lasting and innovative work in the industry, driven by this passion.</p>
+        </div>
+
+        <div class="section">
+            <h3 class="section-title">My Work</h3>
+            
+            <div class="video-container">
+                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/m4sjjBlODgY" allowfullscreen></iframe>
+                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/lF4I2jLfbZ0" allowfullscreen></iframe>
+                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/u3JIOSD54Dw" allowfullscreen></iframe>
+                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/c-C9h16Rr9M" allowfullscreen></iframe>
+                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/vIQ1zpA8eWQ" allowfullscreen></iframe>
+                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/ycmvawhWoJ4" allowfullscreen></iframe>
+                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/VqryijD9cDQ" allowfullscreen></iframe>
+                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/y6lCA73HecA" allowfullscreen></iframe>
+                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/w2H1CMRWVf4" allowfullscreen></iframe>
+                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/Z4yD1RJGedc" allowfullscreen></iframe>
+                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/nbLp6LJsKNM" allowfullscreen></iframe>
+                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/VTl0zAWtIZM" allowfullscreen></iframe>
+                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/CHJ05a9BOdk" allowfullscreen></iframe>
+                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/gTr9WPTonR8" allowfullscreen></iframe>
+                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/isXjH0zOUZc" allowfullscreen></iframe>
+                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/KIDsHEt_wf4" allowfullscreen></iframe>
+                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/CPZY2Zt2uSI" allowfullscreen></iframe>
+                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/9jSbM5ZkQAQ" allowfullscreen></iframe>
+                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/ENz__Xlwla4" allowfullscreen></iframe>
+                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/x-IK4dE02-g" allowfullscreen></iframe>
+                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/YTiDgwOrtvc" allowfullscreen></iframe>
+                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/2lUkUxLp0O8" allowfullscreen></iframe>
+                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/rSHMJHIkUEM" allowfullscreen></iframe>
+                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/6dLV0qYi4G0" allowfullscreen></iframe>
+                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/nQgmQSmiI_U" allowfullscreen></iframe>
+                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/viITSFKLv78" allowfullscreen></iframe>
+                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/33QnseuVKvM" allowfullscreen></iframe>
+                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/k7HpkbrM4l8" allowfullscreen></iframe>
+                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/CCFSEEHrNIA" allowfullscreen></iframe>
+                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/KX3t25E_KPg" allowfullscreen></iframe>
+                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/Hm2PZ08bBIM" allowfullscreen></iframe>
+                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/MP_k68xPj9w" allowfullscreen></iframe>
+				<iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/KdyFj1B08NU" allowfullscreen></iframe>
+				<iframe type="text/html" frameborder="0" width="1920" height="1080" src="https://www.youtube.com/embed/i-SA7Ph6IJE" allowfullscreen></iframe>
+            </div>
+        </div>
+		
+		<div class="section">
+            <h3 class="section-title">My Cinematics</h3>
+            
+            <div class="video-container">
+                <iframe type="text/html" frameborder="0" width="1920" height="1080" src="https://www.youtube.com/embed/QSBlG2BbYhA" allowfullscreen></iframe>
+				<iframe type="text/html" frameborder="0" width="1920" height="1080" src="https://www.youtube.com/embed/HDV_TXqTyq8" allowfullscreen></iframe>
+				<iframe type="text/html" frameborder="0" width="1920" height="1080" src="https://www.youtube.com/embed/7hd6g5Mh6d4" allowfullscreen></iframe>
+				<iframe type="text/html" frameborder="0" width="1920" height="1080" src="https://www.youtube.com/embed/eikZDaJEVEw" allowfullscreen></iframe>
+				
+            </div>
+        </div>
+
+        <div class="section">
+            <h3 class="section-title">Contact</h3>
+            <p>E-Mail: kdrrtptss@gmail.com</p>
+            <p>KADİR TOPTAŞ @2025</p>
+        </div>
+    </div>
+
+    <div id="lightbox" class="lightbox">
+        <span class="close">×</span>
+        <div class="lightbox-content">
+            <img id="lightbox-img" src="">
+        </div>
+    </div>
+
+    <script>
+        // Lightbox script
+        const galleryImages = document.querySelectorAll('.gallery img');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const close = document.querySelector('.close');
+
+        galleryImages.forEach(image => {
+            image.addEventListener('click', () => {
+                lightbox.style.display = 'block';
+                lightboxImg.src = image.src;
+            });
+        });
+
+        close.addEventListener('click', () => {
+            lightbox.style.display = 'none';
+        });
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target !== lightboxImg) {
+                lightbox.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
