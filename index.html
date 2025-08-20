@@ -1,11 +1,15 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kadir Toptaş - Game Developer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* TEMEL STİLLER VE PÜRÜZSÜZ KAYDIRMA */
+        html {
+            scroll-behavior: smooth;
+        }
         body {
             font-family: Arial, sans-serif;
             background-color: #000;
@@ -26,203 +30,256 @@
             object-fit: cover;
             margin-bottom: 20px;
         }
-        h1, h2 {
-            margin-bottom: 10px;
+        h1, h2 { margin-bottom: 10px; }
+        .social-icons { margin: 20px 0; }
+        .social-icons a { color: #fff; font-size: 24px; margin: 0 10px; text-decoration: none; }
+        .section { 
+            padding-top: 70px; /* Navigasyon menüsü için boşluk */ 
+            margin-top: -60px; /* ID'ye kaydığında doğru konumlanması için */ 
+            text-align: left; 
         }
-        .social-icons {
-            margin: 20px 0;
-        }
-        .social-icons a {
-            color: #fff;
-            font-size: 24px;
-            margin: 0 10px;
-            text-decoration: none;
-        }
-        .section {
-            margin: 40px 0;
-        }
-        .section-title {
-            font-size: 24px;
-            border-bottom: 2px solid #fff;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-        }
-        .gallery {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        .gallery img {
-            width: calc(30% - 10px); 
-            height: auto; 
-            object-fit: cover;
-            margin: 5px; /* Resimler arası boşluk */
-            cursor: pointer;
-        }
-        .video-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-        }
-        .video-container iframe {
-            flex: 1 1 calc(25% - 10px); 
-            height: 315px; 
-        }
-        /* Lightbox CSS */
-        .lightbox {
-            display: none;
-            position: fixed;
-            z-index: 999;
-            padding-top: 60px;
-            left: 0;
+        .section-title { font-size: 24px; border-bottom: 2px solid #fff; padding-bottom: 10px; margin-bottom: 20px; text-align: center; }
+        .section > p { text-align: center; }
+
+        /* NAVİGASYON MENÜSÜ STİLLERİ */
+        nav {
+            background-color: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid #2a2a2a;
+            position: sticky;
             top: 0;
             width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            padding: 10px 0;
         }
-        .lightbox-content {
-            margin: auto;
-            display: block;
-            width: 80%;
-            max-width: 700px;
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin: 0;
+            padding: 0;
         }
-        .lightbox-content img {
-            width: 100%;
-        }
-        .close {
-            position: absolute;
-            top: 20px;
-            right: 35px;
-            color: #fff;
-            font-size: 40px;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-        .close:hover,
-        .close:focus {
-            color: #bbb;
+        nav ul li a {
+            color: #e0e0e0;
             text-decoration: none;
+            font-weight: bold;
+            padding: 15px 20px;
+            transition: color 0.3s, background-color 0.3s;
+            border-radius: 8px;
+        }
+        nav ul li a:hover {
+            color: #fff;
+            background-color: #2a2a2a;
+        }
+
+        /* YETENEKLER BÖLÜMÜ */
+        .skill-category { margin-bottom: 25px; }
+        .skill-category h4 { font-size: 18px; color: #a0a0a0; border-bottom: 1px solid #444; padding-bottom: 8px; margin-bottom: 20px; text-align: left; }
+        .skills-container { display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 15px; }
+        .skill-item { background-color: #1a1a1a; border-radius: 10px; padding: 15px; width: 110px; height: 90px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; transition: transform 0.3s, background-color 0.3s; }
+        .skill-item:hover { transform: translateY(-5px); background-color: #2a2a2a; }
+        .skill-item img { width: 45px; height: 45px; object-fit: contain; }
+        .skill-item span { font-size: 14px; font-weight: bold; text-align: center; }
+        .skill-item:not(:has(img)) { justify-content: center; }
+        .skill-item:not(:has(img)) span { font-size: 15px; }
+
+        /* PROJE KARTI SİSTEMİ */
+        .project-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 25px; }
+        .project-card { background-color: #121212; border: 1px solid #2a2a2a; border-radius: 15px; overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .project-card:hover { transform: translateY(-5px); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5); }
+        .project-card .project-video iframe { width: 100%; height: 250px; display: block; border: none; }
+        .project-card .project-content { padding: 20px; }
+        .project-card .project-title { font-size: 1.5em; margin: 0 0 10px 0; color: #fff; }
+        .project-card .project-description { font-size: 0.95em; color: #b0b0b0; line-height: 1.6; }
+        .project-card .project-features-title { margin-top: 20px; font-size: 1.1em; color: #fff; border-bottom: 1px solid #333; padding-bottom: 5px; }
+        .project-card .project-features-list { list-style: none; padding: 0; margin: 10px 0 0 0; color: #b0b0b0; }
+        .project-card .project-features-list li { padding-left: 20px; position: relative; margin-bottom: 8px; }
+        .project-card .project-features-list li::before { content: '✓'; color: #00ff9d; position: absolute; left: 0; font-weight: bold; }
+        .project-card .project-tech-stack { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 8px; }
+        .project-card .tech-tag { background-color: #2a2a2a; color: #e0e0e0; padding: 5px 12px; border-radius: 15px; font-size: 0.8em; font-weight: bold; }
+
+        /* YUKARI ÇIK BUTONU */
+        #back-to-top {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 99;
+            border: none;
+            outline: none;
+            background-color: #00ff9d;
+            color: black;
             cursor: pointer;
+            padding: 10px;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 24px;
+            line-height: 30px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        #back-to-top:hover {
+            background-color: #00e68a;
+            transform: scale(1.1);
+        }
+
+        /* MOBİL UYUMLULUK (RESPONSIVE DESIGN) */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-wrap: wrap;
+                padding: 0 10px;
+            }
+            nav ul li a {
+                padding: 10px 12px;
+                font-size: 0.9em;
+            }
+            .project-gallery {
+                grid-template-columns: 1fr; /* Mobilde kartlar tek sütun olsun */
+            }
+            h1 { font-size: 2em; }
+            .section-title { font-size: 1.5em; }
+        }
+        @media (max-width: 480px) {
+            nav ul {
+                justify-content: space-around;
+            }
+            nav ul li a {
+                padding: 8px;
+            }
+            .container {
+                padding: 10px;
+            }
         }
     </style>
 </head>
 <body>
+
+    <nav>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#work">My Work</a></li>
+            <li><a href="#cinematics">Cinematics</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
     <div class="container">
-        <img src="https://i.hizliresim.com/lmjnq76.jpg" alt="Kadir Toptaş" class="profile-img">
-        <h1>Kadir Toptaş</h1>
-        <h2>Game Developer</h2>
-        
-        <div class="social-icons">
-            <a href="https://github.com/KadirToptas" target="_blank"><i class="fab fa-github"></i></a>
-            <a href="https://www.linkedin.com/in/kadirtoptas/" target="_blank"><i class="fab fa-linkedin"></i></a>
-            <a href="https://www.youtube.com/@kadirtoptasue5" target="_blank"><i class="fab fa-youtube"></i></a>
+        <div style="padding-top: 20px;"> <img src="https://i.hizliresim.com/lmjnq76.jpg" alt="Kadir Toptaş" class="profile-img">
+            <h1>Kadir Toptaş</h1>
+            <h2>Game Developer</h2>
+            <div class="social-icons">
+                <a href="https://github.com/KadirToptas" target="_blank" aria-label="Github"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/kadirtoptas/" target="_blank" aria-label="Linkedin"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.youtube.com/@kadirtoptasue5" target="_blank" aria-label="Youtube"><i class="fab fa-youtube"></i></a>
+            </div>
         </div>
 
-        <div class="section">
+        <div class="section" id="about">
             <h3 class="section-title">About Me</h3>
             <p> I am Kadir Toptaş, a student at Yıldız Technical University and a passionate game developer. My fascination with video games has been an integral part of my life since I was 5 years old, and I have decided to turn this passion into a professional career.</p>
             <p>My game development journey began over two years ago with the Unity engine. During this time, I focused on mobile platforms and successfully published two games on the Google Play Store. Alongside these experiences, I have developed numerous demos and prototypes to nurture my creativity and technical skills. Driven by a desire for continuous growth, I have been working with Unreal Engine for the past year, elevating the experience I initially gained with the Blueprint system by significantly improving my proficiency in C++.</p>
-            <p> With the goal of mastering every stage of the development process, I actively use a wide range of technologies and software:</p>
-            <p> Game Engines: Unreal Engine, Unity</p>
-            <p> Programming Languages: C++, C#, Python, SQL, HTML, CSS</p>
-            <p> 3D/2D Design & Texturing: Blender, Maya, 3ds Max, Substance 3D Painter, Aseprite, Photoshop, Illustrator</p>
-            <p> Video, UI/UX & Audio: Adobe Premiere Pro, After Effects, Figma, FL Studio</p>
-            <p> Office Software: Microsoft Office</p>
             <p> I have participated in numerous Game Jams, Hackathons and Bootcamps to continuously test my theoretical knowledge and practical experience. These events have strengthened my problem-solving and teamwork skills.</p>
             <p> With an unceasing desire to learn and improve, I am determined to build a solid career in this field. For me, game development is more than just a job; it is the art of creating new worlds, telling stories, and offering players unforgettable experiences. My greatest ambition is to achieve lasting and innovative work in the industry, driven by this passion.</p>
         </div>
 
-        <div class="section">
+        <div class="section" id="skills">
+            <h3 class="section-title">Technical Skills</h3>
+            <div class="skill-category"><h4>Game Engines</h4><div class="skills-container"><div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unrealengine/unrealengine-original.svg" alt="Unreal Engine Logo"><span>Unreal Engine</span></div><div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/unity/unity-original.svg" alt="Unity Logo"><span>Unity</span></div><div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/godot/godot-original.svg" alt="Godot Engine Logo"><span>Godot</span></div><div class="skill-item"><span>Defold</span></div></div></div>
+            <div class="skill-category"><h4>Programming Languages & Libraries</h4><div class="skills-container"><div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++ Logo"><span>C++</span></div><div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" alt="C# Logo"><span>C#</span></div><div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python Logo"><span>Python</span></div><div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dart/dart-original.svg" alt="Dart Logo"><span>Dart</span></div><div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5 Logo"><span>HTML</span></div><div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3 Logo"><span>CSS</span></div><div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="SQL Logo"><span>SQL</span></div><div class="skill-item"><span>Blueprint</span></div><div class="skill-item"><img src="KENDİ_SFML_LOGO_URL" alt="SFML Logo"><span>SFML</span></div><div class="skill-item"><img src="KENDİ_RAYLIB_LOGO_URL" alt="Raylib Logo"><span>Raylib</span></div><div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/opengl/opengl-original.svg" alt="OpenGL Logo"><span>OpenGL</span></div><div class="skill-item"><img src="KENDİ_WEBGL_LOGO_URL" alt="WebGL Logo"><span>WebGL</span></div></div></div>
+            <div class="skill-category"><h4>3D/2D Design & Texturing</h4><div class="skills-container"><div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/blender/blender-original.svg" alt="Blender Logo"><span>Blender</span></div><div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/maya/maya-original.svg" alt="Autodesk Maya Logo"><span>Maya</span></div><div class="skill-item"><span>Substance P.</span></div><div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma Logo"><span>Figma</span></div><div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/krita/krita-original.svg" alt="Krita Logo"><span>Krita</span></div><div class="skill-item"><span>Aseprite</span></div><div class="skill-item"><span>Tiled</span></div></div></div>
+            <div class="skill-category"><h4>Video, UI/UX & Audio</h4><div class="skills-container"><div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/premierepro/premierepro-original.svg" alt="Premiere Pro Logo"><span>Premiere Pro</span></div><div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/aftereffects/aftereffects-original.svg" alt="After Effects Logo"><span>After Effects</span></div><div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/illustrator/illustrator-plain.svg" alt="Illustrator Logo"><span>Illustrator</span></div><div class="skill-item"><span>Animate</span></div></div></div>
+        </div>
+
+        <div class="section" id="work">
             <h3 class="section-title">My Work</h3>
-            
-            <div class="video-container">
-                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/m4sjjBlODgY" allowfullscreen></iframe>
-                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/lF4I2jLfbZ0" allowfullscreen></iframe>
-                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/u3JIOSD54Dw" allowfullscreen></iframe>
-                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/c-C9h16Rr9M" allowfullscreen></iframe>
-                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/vIQ1zpA8eWQ" allowfullscreen></iframe>
-                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/ycmvawhWoJ4" allowfullscreen></iframe>
-                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/VqryijD9cDQ" allowfullscreen></iframe>
-                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/y6lCA73HecA" allowfullscreen></iframe>
-                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/w2H1CMRWVf4" allowfullscreen></iframe>
-                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/Z4yD1RJGedc" allowfullscreen></iframe>
-                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/nbLp6LJsKNM" allowfullscreen></iframe>
-                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/VTl0zAWtIZM" allowfullscreen></iframe>
-                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/CHJ05a9BOdk" allowfullscreen></iframe>
-                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/gTr9WPTonR8" allowfullscreen></iframe>
-                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/isXjH0zOUZc" allowfullscreen></iframe>
-                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/KIDsHEt_wf4" allowfullscreen></iframe>
-                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/CPZY2Zt2uSI" allowfullscreen></iframe>
-                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/9jSbM5ZkQAQ" allowfullscreen></iframe>
-                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/ENz__Xlwla4" allowfullscreen></iframe>
-                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/x-IK4dE02-g" allowfullscreen></iframe>
-                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/YTiDgwOrtvc" allowfullscreen></iframe>
-                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/2lUkUxLp0O8" allowfullscreen></iframe>
-                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/rSHMJHIkUEM" allowfullscreen></iframe>
-                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/6dLV0qYi4G0" allowfullscreen></iframe>
-                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/nQgmQSmiI_U" allowfullscreen></iframe>
-                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/viITSFKLv78" allowfullscreen></iframe>
-                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/33QnseuVKvM" allowfullscreen></iframe>
-                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/k7HpkbrM4l8" allowfullscreen></iframe>
-                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/CCFSEEHrNIA" allowfullscreen></iframe>
-                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/KX3t25E_KPg" allowfullscreen></iframe>
-                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/Hm2PZ08bBIM" allowfullscreen></iframe>
-                <iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/MP_k68xPj9w" allowfullscreen></iframe>
-				<iframe type="text/html" frameborder="0" src="https://www.youtube.com/embed/KdyFj1B08NU" allowfullscreen></iframe>
-				<iframe type="text/html" frameborder="0" width="1920" height="1080" src="https://www.youtube.com/embed/i-SA7Ph6IJE" allowfullscreen></iframe>
+            <div class="project-gallery">
+                <div class="project-card"><div class="project-video"><iframe loading="lazy" title="Anti-Gravity Field Mechanic" frameborder="0" data-src="https://www.youtube.com/embed/m4sjjBlODgY" allowfullscreen></iframe></div><div class="project-content"><h4 class="project-title">Anti-Gravity Field Mechanic</h4><p class="project-description">Designed a field that applies a unique gravitational force to any object that enters it, complete with custom materials, textures, and a post-process effect to visually signal the player's presence within the zone.</p><h5 class="project-features-title">Key Features</h5><ul class="project-features-list"><li>Physics Volume Implementation</li><li>Custom Materials & Post-Process Effects</li></ul><div class="project-tech-stack"><span class="tech-tag">Unreal Engine</span></div></div></div>
+                <div class="project-card"><div class="project-video"><iframe loading="lazy" title="Bow and Arrow Mechanic" frameborder="0" data-src="https://www.youtube.com/embed/lF4I2jLfbZ0" allowfullscreen></iframe></div><div class="project-content"><h4 class="project-title">Bow and Arrow Mechanic</h4><p class="project-description">A third-person archery simulation where arrows follow a natural trajectory via physics simulation. The bow's tension and arrow velocity are determined by how long the player holds the fire button.</p><h5 class="project-features-title">Key Features</h5><ul class="project-features-list"><li>Physics-Based Projectile Trajectory</li><li>Charge-Up Shot Mechanic</li></ul><div class="project-tech-stack"><span class="tech-tag">Unreal Engine</span></div></div></div>
+                <div class="project-card"><div class="project-video"><iframe loading="lazy" title="Dungeon Adventure Game" frameborder="0" data-src="https://www.youtube.com/embed/u3JIOSD54Dw" allowfullscreen></iframe></div><div class="project-content"><h4 class="project-title">Dungeon Adventure Game</h4><p class="project-description">A 2D combat game where players fight off waves of enemies using a sword or bow. Developed using the PaperZD plugin for advanced 2D animation and state management in a 3D engine.</p><h5 class="project-features-title">Key Features</h5><ul class="project-features-list"><li>2D Animation with PaperZD</li><li>Wave-Based Enemy Spawning</li></ul><div class="project-tech-stack"><span class="tech-tag">Unreal Engine</span><span class="tech-tag">Aseprite</span></div></div></div>
+                <div class="project-card"><div class="project-video"><iframe loading="lazy" title="Enemy AI with Variations" frameborder="0" data-src="https://www.youtube.com/embed/c-C9h16Rr9M" allowfullscreen></iframe></div><div class="project-content"><h4 class="project-title">Enemy AI with Variations</h4><p class="project-description">Developed a complex AI system featuring four distinct archetypes (Melee, Ranged, Mage, Boss). Each AI has unique patrol mechanics, audio sensitivity, target acquisition, combat skills, and custom animations for taking and dealing damage.</p><h5 class="project-features-title">Key Features</h5><ul class="project-features-list"><li>Behavior Tree & State Machine AI</li><li>Audio & Visual Perception System</li><li>Multiple AI Archetypes</li></ul><div class="project-tech-stack"><span class="tech-tag">Unreal Engine</span><span class="tech-tag">Blender</span></div></div></div>
+                <div class="project-card"><div class="project-video"><iframe loading="lazy" title="Fall Damage System" frameborder="0" data-src="https://www.youtube.com/embed/vIQ1zpA8eWQ" allowfullscreen></iframe></div><div class="project-content"><h4 class="project-title">Fall Damage System</h4><p class="project-description">A system that plays different fall and landing animations based on the fall height and applies damage accordingly. This adds a layer of realism and risk to vertical traversal.</p><h5 class="project-features-title">Key Features</h5><ul class="project-features-list"><li>Height-Based Damage Calculation</li><li>Contextual Animation System</li></ul><div class="project-tech-stack"><span class="tech-tag">Unreal Engine</span><span class="tech-tag">Blender</span></div></div></div>
+                <div class="project-card"><div class="project-video"><iframe loading="lazy" title="Flight System" frameborder="0" data-src="https://www.youtube.com/embed/ycmvawhWoJ4" allowfullscreen></iframe></div><div class="project-content"><h4 class="project-title">Flight System</h4><p class="project-description">A multi-mode flight mechanic featuring standard flight, a slower cinematic mode, and a supersonic mode for rapid acceleration and traversal, giving players granular control over their movement speed.</p><h5 class="project-features-title">Key Features</h5><ul class="project-features-list"><li>Multi-Mode Movement System</li><li>Cinematic Camera Controls</li></ul><div class="project-tech-stack"><span class="tech-tag">Unreal Engine</span></div></div></div>
+                <div class="project-card"><div class="project-video"><iframe loading="lazy" title="FNAF Camera System" frameborder="0" data-src="https://www.youtube.com/embed/VqryijD9cDQ" allowfullscreen></iframe></div><div class="project-content"><h4 class="project-title">FNAF Camera System</h4><p class="project-description">A functional clone of the camera system from the Five Nights at Freddy's series. Players use an in-game tablet to switch between security cameras to monitor rooms and control environmental elements like doors.</p><h5 class="project-features-title">Key Features</h5><ul class="project-features-list"><li>Interactive UI (UMG)</li><li>Dynamic Camera Switching</li></ul><div class="project-tech-stack"><span class="tech-tag">Unreal Engine</span></div></div></div>
+                <div class="project-card"><div class="project-video"><iframe loading="lazy" title="Functional Black Holes" frameborder="0" data-src="https://www.youtube.com/embed/y6lCA73HecA" allowfullscreen></iframe></div><div class="project-content"><h4 class="project-title">Functional Black Holes</h4><p class="project-description">Created two distinct types of black holes with opposing behaviors: a blue one that pulls nearby physics objects into its vortex, and an orange one that expels them, creating dynamic environmental puzzles.</p><h5 class="project-features-title">Key Features</h5><ul class="project-features-list"><li>Advanced Physics Manipulation</li><li>Custom Visual Effects (VFX)</li></ul><div class="project-tech-stack"><span class="tech-tag">Unreal Engine</span></div></div></div>
+                <div class="project-card"><div class="project-video"><iframe loading="lazy" title="Grid Inventory System" frameborder="0" data-src="https://www.youtube.com/embed/w2H1CMRWVf4" allowfullscreen></iframe></div><div class="project-content"><h4 class="project-title">Grid Inventory System</h4><p class="project-description">A grid-based inventory system where items can be stacked up to a certain limit. Players can rotate items to efficiently manage their inventory space, adding a strategic layer to item management.</p><h5 class="project-features-title">Key Features</h5><ul class="project-features-list"><li>Grid-Based UI Logic</li><li>Item Stacking & Rotation</li></ul><div class="project-tech-stack"><span class="tech-tag">Unreal Engine</span></div></div></div>
+                <div class="project-card"><div class="project-video"><iframe loading="lazy" title="GTA Character Transition" frameborder="0" data-src="https://www.youtube.com/embed/Z4yD1RJGedc" allowfullscreen></iframe></div><div class="project-content"><h4 class="project-title">GTA Character Transition</h4><p class="project-description">A recreation of the instant character-switching mechanic from GTA V. The system seamlessly transitions the camera and player control to another character's position, including a faithful replication of the iconic zoom-out/zoom-in transition effect.</p><h5 class="project-features-title">Key Features</h5><ul class="project-features-list"><li>Seamless Character Switching</li><li>Advanced Camera Control & VFX</li></ul><div class="project-tech-stack"><span class="tech-tag">Unreal Engine</span></div></div></div>
+                <div class="project-card"><div class="project-video"><iframe loading="lazy" title="Hang and Swing Mechanic" frameborder="0" data-src="https://www.youtube.com/embed/nbLp6LJsKNM" allowfullscreen></iframe></div><div class="project-content"><h4 class="project-title">Hang and Swing Mechanic</h4><p class="project-description">A complex traversal mechanic allowing the character to hang from ledges and swing to the next reachable surface. The system uses six different collision checks to accurately calculate attachment points, swing arcs, and release trajectories.</p><h5 class="project-features-title">Key Features</h5><ul class="project-features-list"><li>Multi-Collision Detection System</li><li>Physics-Based Swing Mechanic</li></ul><div class="project-tech-stack"><span class="tech-tag">Unreal Engine</span><span class="tech-tag">Blender</span></div></div></div>
+                <div class="project-card"><div class="project-video"><iframe loading="lazy" title="HD2D Style Game" frameborder="0" data-src="https://www.youtube.com/embed/VTl0zAWtIZM" allowfullscreen></iframe></div><div class="project-content"><h4 class="project-title">HD2D Style Game</h4><p class="project-description">A game prototype in the HD2D style, featuring 2D pixel art characters (created with PaperZD) in a 3D environment. Implemented NPC dialogue, a follower system, and an occlusion mask to keep the player visible behind buildings.</p><h5 class="project-features-title">Key Features</h5><ul class="project-features-list"><li>HD2D Visual Style (2D in 3D)</li><li>NPC Follower AI & Dialogue System</li><li>Character Occlusion Mask</li></ul><div class="project-tech-stack"><span class="tech-tag">Unreal Engine</span><span class="tech-tag">Aseprite</span></div></div></div>
+                <div class="project-card"><div class="project-video"><iframe loading="lazy" title="Jumpscare System" frameborder="0" data-src="https://www.youtube.com/embed/CHJ05a9BOdk" allowfullscreen></iframe></div><div class="project-content"><h4 class="project-title">Jumpscare System</h4><p class="project-description">A horror game mechanic where an enemy AI pursues the player upon sight or sound detection. If caught, the system triggers a jumpscare event, enhancing the suspense and player feedback.</p><h5 class="project-features-title">Key Features</h5><ul class="project-features-list"><li>AI Perception (Sight/Sound)</li><li>Triggered Cinematic Events</li></ul><div class="project-tech-stack"><span class="tech-tag">Unreal Engine</span></div></div></div>
+                <div class="project-card"><div class="project-video"><iframe loading="lazy" title="Ledge Climb System" frameborder="0" data-src="https://www.youtube.com/embed/gTr9WPTonR8" allowfullscreen></iframe></div><div class="project-content"><h4 class="project-title">Ledge Climb System</h4><p class="project-description">A sophisticated climbing system that uses eight different collision checks to detect climbable surfaces and ledges. The character can perform long jumps to distant ledges and dynamically adjusts animations based on surface proximity (feet on wall vs. hanging).</p><h5 class="project-features-title">Key Features</h5><ul class="project-features-list"><li>8-Point Collision Detection</li><li>Contextual & Procedural Animation</li></ul><div class="project-tech-stack"><span class="tech-tag">Unreal Engine</span></div></div></div>
+                <div class="project-card"><div class="project-video"><iframe loading="lazy" title="Narrow Passage System" frameborder="0" data-src="https://www.youtube.com/embed/isXjH0zOUZc" allowfullscreen></iframe></div><div class="project-content"><h4 class="project-title">Narrow Passage System</h4><p class="project-description">A contextual movement system for navigating tight spaces. It calculates the entry angle and passage width to determine if the character can enter and plays the appropriate animation.</p><h5 class="project-features-title">Key Features</h5><ul class="project-features-list"><li>Context-Aware Movement</li><li>Procedural Animation Selection</li></ul><div class="project-tech-stack"><span class="tech-tag">Unreal Engine</span></div></div></div>
+                <div class="project-card"><div class="project-video"><iframe loading="lazy" title="Shooting Pistol System" frameborder="0" data-src="https://www.youtube.com/embed/KIDsHEt_wf4" allowfullscreen></iframe></div><div class="project-content"><h4 class="project-title">Shooting Pistol System</h4><p class="project-description">A complete pistol combat system featuring firing, reloading, and holstering mechanics. The system includes projectile hit detection, damage application on destructible objects, bullet hole decals, and tracer effects.</p><h5 class="project-features-title">Key Features</h5><ul class="project-features-list"><li>Line Trace Hit Detection</li><li>Weapon State Management</li><li>Decals & Particle Effects</li></ul><div class="project-tech-stack"><span class="tech-tag">Unreal Engine</span></div></div></div>
+                <div class="project-card"><div class="project-video"><iframe loading="lazy" title="Planet Shaders and Materials System" frameborder="0" data-src="https://www.youtube.com/embed/CPZY2Zt2uSI" allowfullscreen></iframe></div><div class="project-content"><h4 class="project-title">Planet Shaders and Materials System</h4><p class="project-description">Using real planet textures from NASA, I created a modular system where materials and shaders dynamically react to the angle of a simulated sun. This creates realistic lighting and shadows on the planets, and the system works with any custom texture.</p><h5 class="project-features-title">Key Features</h5><ul class="project-features-list"><li>Dynamic & Modular Material Shaders</li><li>Realistic Lighting Simulation</li></ul><div class="project-tech-stack"><span class="tech-tag">Unreal Engine</span><span class="tech-tag">Blender</span><span class="tech-tag">Krita</span></div></div></div>
+                <div class="project-card"><div class="project-video"><iframe loading="lazy" title="Power Cable Mechanic" frameborder="0" data-src="https://www.youtube.com/embed/9jSbM5ZkQAQ" allowfullscreen></iframe></div><div class="project-content"><h4 class="project-title">Power Cable Mechanic</h4><p class="project-description">A puzzle mechanic where players activate objects by stepping on connected pressure plates. The power effect travels along the cable visually, with the "charge" duration depending on how long the plate is held down.</p><h5 class="project-features-title">Key Features</h5><ul class="project-features-list"><li>Event-Driven Puzzle Logic</li><li>Dynamic Material Effects</li></ul><div class="project-tech-stack"><span class="tech-tag">Unreal Engine</span></div></div></div>
+                <div class="project-card"><div class="project-video"><iframe loading="lazy" title="Pressure Plate with Physics" frameborder="0" data-src="https://www.youtube.com/embed/ENz__Xlwla4" allowfullscreen></iframe></div><div class="project-content"><h4 class="project-title">Pressure Plate with Physics</h4><p class="project-description">A fully physics-based pressure plate system. Players can solve puzzles by picking up and placing objects of varying weights onto the plates to trigger interactions, rather than relying on simple triggers.</p><h5 class="project-features-title">Key Features</h5><ul class="project-features-list"><li>Physics-Based Interaction</li><li>Weight-Sensitive Triggers</li></ul><div class="project-tech-stack"><span class="tech-tag">Unreal Engine</span></div></div></div>
+                <div class="project-card"><div class="project-video"><iframe loading="lazy" title="Procedural Room Generator" frameborder="0" data-src="https://www.youtube.com/embed/x-IK4dE02-g" allowfullscreen></iframe></div><div class="project-content"><h4 class="project-title">Procedural Room Generator</h4><p class="project-description">A highly modular system that generates unique room layouts every time. The generation logic is fully customizable, allowing control over room spawn frequency, loot tables, and architectural styles.</p><h5 class="project-features-title">Key Features</h5><ul class="project-features-list"><li>Procedural Content Generation (PCG)</li><li>Modular & Customizable Logic</li></ul><div class="project-tech-stack"><span class="tech-tag">Unreal Engine</span></div></div></div>
+                <div class="project-card"><div class="project-video"><iframe loading="lazy" title="Push, Pull and Zipline Mechanic" frameborder="0" data-src="https://www.youtube.com/embed/YTiDgwOrtvc" allowfullscreen></iframe></div><div class="project-content"><h4 class="project-title">Push, Pull and Zipline Mechanic</h4><p class="project-description">A set of traversal and puzzle mechanics. Players can push and pull interactive boxes to reach new areas, and use ziplines to quickly traverse long distances.</p><h5 class="project-features-title">Key Features</h5><ul class="project-features-list"><li>Physics-Based Object Interaction</li><li>Spline-Based Movement (Zipline)</li></ul><div class="project-tech-stack"><span class="tech-tag">Unreal Engine</span><span class="tech-tag">Blender</span></div></div></div>
+                <div class="project-card"><div class="project-video"><iframe loading="lazy" title="Reverse Time Mechanic" frameborder="0" data-src="https://www.youtube.com/embed/2lUkUxLp0O8" allowfullscreen></iframe></div><div class="project-content"><h4 class="project-title">Reverse Time Mechanic</h4><p class="project-description">A time manipulation mechanic that allows the player to rewind their character's position, rotation, and camera angle, enabling unique puzzle-solving and "undo" opportunities.</p><h5 class="project-features-title">Key Features</h5><ul class="project-features-list"><li>State-Saving & Reversal</li><li>Time Manipulation Gameplay</li></ul><div class="project-tech-stack"><span class="tech-tag">Unreal Engine</span></div></div></div>
+                <div class="project-card"><div class="project-video"><iframe loading="lazy" title="Roll Dash System" frameborder="0" data-src="https://www.youtube.com/embed/rSHMJHIkUEM" allowfullscreen></iframe></div><div class="project-content"><h4 class="project-title">Roll Dash System</h4><p class="project-description">A fluid and responsive movement system for combat and traversal. The character can perform an 8-directional dodge roll and an instant dash for quick repositioning.</p><h5 class="project-features-title">Key Features</h5><ul class="project-features-list"><li>8-Directional Movement</li><li>Advanced Animation Blending</li></ul><div class="project-tech-stack"><span class="tech-tag">Unreal Engine</span></div></div></div>
+                <div class="project-card"><div class="project-video"><iframe loading="lazy" title="Root Motion Locomotion" frameborder="0" data-src="https://www.youtube.com/embed/6dLV0qYi4G0" allowfullscreen></iframe></div><div class="project-content"><h4 class="project-title">Root Motion Locomotion</h4><p class="project-description">An advanced locomotion system using Root Motion. It calculates the character's angle relative to the camera and the desired turn angle from player input to create exceptionally smooth and natural transitions between animations.</p><h5 class="project-features-title">Key Features</h5><ul class="project-features-list"><li>Root Motion Implementation</li><li>Smooth Animation Blending & Transitions</li></ul><div class="project-tech-stack"><span class="tech-tag">Unreal Engine</span></div></div></div>
+                <div class="project-card"><div class="project-video"><iframe loading="lazy" title="Interactive Security Camera System" frameborder="0" data-src="https://www.youtube.com/embed/nQgmQSmiI_U" allowfullscreen></iframe></div><div class="project-content"><h4 class="project-title">Interactive Security Camera System</h4><p class="project-description">A system where players can interact with a monitor to view and switch between multiple security cameras placed throughout the level, similar to surveillance systems in stealth or horror games.</p><h5 class="project-features-title">Key Features</h5><ul class="project-features-list"><li>Render Target UI</li><li>Dynamic Camera Management</li></ul><div class="project-tech-stack"><span class="tech-tag">Unreal Engine</span></div></div></div>
+                <div class="project-card"><div class="project-video"><iframe loading="lazy" title="Superliminal Clone" frameborder="0" data-src="https://www.youtube.com/embed/viITSFKLv78" allowfullscreen></iframe></div><div class="project-content"><h4 class="project-title">Superliminal Clone</h4><p class="project-description">A project recreating the three core mechanics of the game Superliminal. Players solve puzzles by manipulating the size and perspective of objects. The project also features portals that alter object/player scale and decals that form 3D objects when viewed from the correct angle.</p><h5 class="project-features-title">Key Features</h5><ul class="project-features-list"><li>Perspective-Based Scaling Mechanic</li><li>Portal System with Scale Manipulation</li><li>Decal-to-3D Object Conversion</li></ul><div class="project-tech-stack"><span class="tech-tag">Unreal Engine</span><span class="tech-tag">Blender</span><span class="tech-tag">Krita</span></div></div></div>
+                <div class="project-card"><div class="project-video"><iframe loading="lazy" title="Swimming System" frameborder="0" data-src="https://www.youtube.com/embed/33QnseuVKvM" allowfullscreen></iframe></div><div class="project-content"><h4 class="project-title">Swimming System</h4><p class="project-description">A comprehensive swimming system that detects water contact, depth, and whether the character is diving or surfacing. Includes integrated stamina and breath-holding mechanics for added realism.</p><h5 class="project-features-title">Key Features</h5><ul class="project-features-list"><li>Water Physics & Buoyancy</li><li>Stamina & Breath Management</li><li>Contextual Animation States</li></ul><div class="project-tech-stack"><span class="tech-tag">Unreal Engine</span></div></div></div>
+                <div class="project-card"><div class="project-video"><iframe loading="lazy" title="Take Hostage System" frameborder="0" data-src="https://www.youtube.com/embed/k7HpkbrM4l8" allowfullscreen></iframe></div><div class="project-content"><h4 class="project-title">Take Hostage System</h4><p class="project-description">A stealth mechanic allowing players to approach characters from behind and take them hostage. If the hostage is eliminated, an active ragdoll effect is applied; if released, they return to their standard AI behavior.</p><h5 class="project-features-title">Key Features</h5><ul class="project-features-list"><li>Contextual Interaction System</li><li>Active Ragdoll Physics</li></ul><div class="project-tech-stack"><span class="tech-tag">Unreal Engine</span></div></div></div>
+                <div class="project-card"><div class="project-video"><iframe loading="lazy" title="Telekinetic Skill Mechanic" frameborder="0" data-src="https://www.youtube.com/embed/CCFSEEHrNIA" allowfullscreen></iframe></div><div class="project-content"><h4 class="project-title">Telekinetic Skill Mechanic</h4><p class="project-description">A telekinesis ability where the character can lift and manipulate interactive objects within range. The pushing force increases the longer an object is held, and objects can be thrown or gently released.</p><h5 class="project-features-title">Key Features</h5><ul class="project-features-list"><li>Physics-Based Object Manipulation</li><li>Charge-Up Force Mechanic</li></ul><div class="project-tech-stack"><span class="tech-tag">Unreal Engine</span></div></div></div>
+                <div class="project-card"><div class="project-video"><iframe loading="lazy" title="Tetris Clone" frameborder="0" data-src="https://www.youtube.com/embed/KX3t25E_KPg" allowfullscreen></iframe></div><div class="project-content"><h4 class="project-title">Tetris Clone</h4><p class="project-description">A classic 3D Tetris clone featuring six types of four-block tetrominoes and standard Tetris rules, built as an exercise in grid-based logic and game state management.</p><h5 class="project-features-title">Key Features</h5><ul class="project-features-list"><li>Grid-Based Game Logic</li><li>Game State Management</li></ul><div class="project-tech-stack"><span class="tech-tag">Unreal Engine</span></div></div></div>
+                <div class="project-card"><div class="project-video"><iframe loading="lazy" title="3D Platformer Base" frameborder="0" data-src="https://www.youtube.com/embed/Hm2PZ08bBIM" allowfullscreen></iframe></div><div class="project-content"><h4 class="project-title">3D Platformer Base</h4><p class="project-description">A starter template for a 3D platformer game. Includes essential mechanics like dynamic camera angles, wall grabbing/sliding, and a double jump, providing a solid foundation for further development.</p><h5 class="project-features-title">Key Features</h5><ul class="project-features-list"><li>Core Platformer Mechanics</li><li>Dynamic Camera System</li></ul><div class="project-tech-stack"><span class="tech-tag">Unreal Engine</span></div></div></div>
+                <div class="project-card"><div class="project-video"><iframe loading="lazy" title="Top-Down Survival & Kingdom Builder" frameborder="0" data-src="https://www.youtube.com/embed/MP_k68xPj9w" allowfullscreen></iframe></div><div class="project-content"><h4 class="project-title">Top-Down Survival & Kingdom Builder</h4><p class="project-description">A survival game prototype developed in Unreal Engine where players build their own kingdom by gathering resources and constructing various buildings.</p><h5 class="project-features-title">Key Features</h5><ul class="project-features-list"><li><strong>Modular UI Architecture:</strong> Designed a fully scalable UI from scratch, allowing new items to be added with a single click.</li><li><strong>Dynamic Resource Management:</strong> Implemented a system where different resources are gathered based on the equipped tool.</li><li><strong>Grid-Based Construction:</strong> Developed a dynamic construction mechanic for strategic settlement expansion.</li><li><strong>Original Art & Assets:</strong> All UI elements created from scratch using Blender and Illustrator.</li></ul><div class="project-tech-stack"><span class="tech-tag">Unreal Engine</span><span class="tech-tag">Blender</span><span class="tech-tag">Illustrator</span></div></div></div>
+                <div class="project-card"><div class="project-video"><iframe loading="lazy" title="Counter-Strike Clone" frameborder="0" data-src="https://www.youtube.com/embed/KdyFj1B08NU" allowfullscreen></iframe></div><div class="project-content"><h4 class="project-title">Counter-Strike Clone</h4><p class="project-description">A simple, fully multiplayer FPS clone of Counter-Strike. Features two teams, multiple weapon types (pistol, knife, rifle), and a round-based win condition. A great exercise in networking and core FPS mechanics.</p><h5 class="project-features-title">Key Features</h5><ul class="project-features-list"><li>Multiplayer Networking</li><li>Team-Based Gameplay Logic</li><li>Core FPS Mechanics</li></ul><div class="project-tech-stack"><span class="tech-tag">Unreal Engine</span></div></div></div>
+                <div class="project-card"><div class="project-video"><iframe loading="lazy" title="Shake It Off Themed Game" frameborder="0" data-src="https://www.youtube.com/embed/i-SA7Ph6IJE" allowfullscreen></iframe></div><div class="project-content"><h4 class="project-title">Shake It Off Themed Game</h4><p class="project-description">An HD2D-style game about a character trapped in a snow globe, trying to save their cat. The globe shakes randomly, causing gifts to fall from the sky. Players must dodge obstacles, solve puzzles, and ultimately escape with the cat.</p><h5 class="project-features-title">Key Features</h5><ul class="project-features-list"><li>HD2D Style with PaperZD</li><li>Randomized Environmental Hazards</li><li>Puzzle-Solving Gameplay</li></ul><div class="project-tech-stack"><span class="tech-tag">Unreal Engine</span><span class="tech-tag">Blender</span><span class="tech-tag">Aseprite</span><span class="tech-tag">Tiled</span></div></div></div>
             </div>
         </div>
-		
-		<div class="section">
+
+        <div class="section" id="cinematics">
             <h3 class="section-title">My Cinematics</h3>
-            
-            <div class="video-container">
-                <iframe type="text/html" frameborder="0" width="1920" height="1080" src="https://www.youtube.com/embed/QSBlG2BbYhA" allowfullscreen></iframe>
-				<iframe type="text/html" frameborder="0" width="1920" height="1080" src="https://www.youtube.com/embed/HDV_TXqTyq8" allowfullscreen></iframe>
-				<iframe type="text/html" frameborder="0" width="1920" height="1080" src="https://www.youtube.com/embed/7hd6g5Mh6d4" allowfullscreen></iframe>
-				<iframe type="text/html" frameborder="0" width="1920" height="1080" src="https://www.youtube.com/embed/eikZDaJEVEw" allowfullscreen></iframe>
-				
+            <div class="project-gallery">
+                <div class="project-card"><div class="project-video"><iframe loading="lazy" title="Detective Cinematic" frameborder="0" data-src="https://www.youtube.com/embed/QSBlG2BbYhA" allowfullscreen></iframe></div><div class="project-content"><h4 class="project-title">Detective Cinematic</h4><p class="project-description">A short cinematic scene of a detective in his study, contemplating a case. This project focuses on character animation, featuring a custom MetaHuman with full-body and facial motion capture, and includes voice-over work.</p><h5 class="project-features-title">Key Features</h5><ul class="project-features-list"><li>Custom MetaHuman Character</li><li>Facial & Full-Body Motion Capture</li><li>Voice Acting & Sound Design</li></ul><div class="project-tech-stack"><span class="tech-tag">Unreal Engine</span><span class="tech-tag">MetaHuman</span></div></div></div>
+                <div class="project-card"><div class="project-video"><iframe loading="lazy" title="Drop The Mic - Trailer" frameborder="0" data-src="https://www.youtube.com/embed/HDV_TXqTyq8" allowfullscreen></iframe></div><div class="project-content"><h4 class="project-title">Drop The Mic - Trailer</h4><p class="project-description">A cinematic and gameplay trailer for a game jam project. The story involves solving puzzles in a late rapper's house to find a legendary golden microphone, while fighting off rival musicians. Showcases storytelling through environmental puzzles and combat.</p><h5 class="project-features-title">Key Features</h5><ul class="project-features-list"><li>Cinematic Storytelling</li><li>Gameplay & Cinematic Fusion</li><li>Custom MetaHuman & Motion Capture</li></ul><div class="project-tech-stack"><span class="tech-tag">Unreal Engine</span></div></div></div>
+                <div class="project-card"><div class="project-video"><iframe loading="lazy" title="ShapeShifter Cinematic" frameborder="0" data-src="https://www.youtube.com/embed/7hd6g5Mh6d4" allowfullscreen></iframe></div><div class="project-content"><h4 class="project-title">ShapeShifter Cinematic</h4><p class="project-description">A cinematic piece about an extraterrestrial shapeshifter on the run. The project's main focus was to convey a chase sequence and the character's abilities through animation and camera work, utilizing a custom MetaHuman and motion capture.</p><h5 class="project-features-title">Key Features</h5><ul class="project-features-list"><li>Action-Oriented Cinematography</li><li>Full-Body Motion Capture</li><li>Character & Narrative Animation</li></ul><div class="project-tech-stack"><span class="tech-tag">Unreal Engine</span><span class="tech-tag">MetaHuman</span></div></div></div>
+                <div class="project-card"><div class="project-video"><iframe loading="lazy" title="Signal - Gameplay & Cinematic" frameborder="0" data-src="https://www.youtube.com/embed/eikZDaJEVEw" allowfullscreen></iframe></div><div class="project-content"><h4 class="project-title">Signal - Gameplay & Cinematic</h4><p class="project-description">Turkish astronauts on patrol investigate unidentified signals from an abandoned base on a desolate planet. This project blends mystery and exploration, using custom MetaHumans with full-body and facial motion capture to deliver a narrative-driven experience.</p><h5 class="project-features-title">Key Features</h5><ul class="project-features-list"><li>Narrative-Driven Exploration</li><li>Facial & Full-Body Motion Capture</li><li>Atmospheric World Design</li></ul><div class="project-tech-stack"><span class="tech-tag">Unreal Engine</span><span class="tech-tag">MetaHuman</span></div></div></div>
             </div>
         </div>
 
-        <div class="section">
+        <div class="section" id="contact">
             <h3 class="section-title">Contact</h3>
-            <p>E-Mail: kdrrtptss@gmail.com</p>
-            <p>KADİR TOPTAŞ @2025</p>
+            <p style="text-align: center;">E-Mail: kdrrtptss@gmail.com</p>
+            <p style="text-align: center;">KADİR TOPTAŞ @2025</p>
         </div>
     </div>
 
-    <div id="lightbox" class="lightbox">
-        <span class="close">×</span>
-        <div class="lightbox-content">
-            <img id="lightbox-img" src="">
-        </div>
-    </div>
+    <a id="back-to-top" href="#" title="Back to top">&#8679;</a>
 
     <script>
-        // Lightbox script
-        const galleryImages = document.querySelectorAll('.gallery img');
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightbox-img');
-        const close = document.querySelector('.close');
-
-        galleryImages.forEach(image => {
-            image.addEventListener('click', () => {
-                lightbox.style.display = 'block';
-                lightboxImg.src = image.src;
-            });
-        });
-
-        close.addEventListener('click', () => {
-            lightbox.style.display = 'none';
-        });
-
-        lightbox.addEventListener('click', (e) => {
-            if (e.target !== lightboxImg) {
-                lightbox.style.display = 'none';
+        // LAZY LOADING SCRIPT'İ
+        document.addEventListener("DOMContentLoaded", function() {
+            var lazyVideos = [].slice.call(document.querySelectorAll("iframe[data-src]"));
+            if ("IntersectionObserver" in window) {
+                let lazyVideoObserver = new IntersectionObserver(function(entries, observer) {
+                    entries.forEach(function(video) {
+                        if (video.isIntersecting) {
+                            video.target.src = video.target.dataset.src;
+                            lazyVideoObserver.unobserve(video.target);
+                        }
+                    });
+                });
+                lazyVideos.forEach(function(lazyVideo) {
+                    lazyVideoObserver.observe(lazyVideo);
+                });
+            } else {
+                lazyVideos.forEach(function(video) { video.src = video.dataset.src; });
             }
+
+            // YUKARI ÇIK BUTONU SCRIPT'İ
+            var backToTopButton = document.getElementById("back-to-top");
+            window.onscroll = function() {
+                if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                    backToTopButton.style.display = "block";
+                } else {
+                    backToTopButton.style.display = "none";
+                }
+            };
         });
     </script>
 </body>
